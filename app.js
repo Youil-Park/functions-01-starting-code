@@ -1,8 +1,9 @@
 const startGameBtn = document.getElementById('start-game-btn'); 
 
-function startGame() {
+// 변수(상수)에 함수 저장하기
+const start = function () { // 익명 함수
   console.log('Game is starting...');
-}
+};
 
 // 2025. 01. 06
 // 객체에 함수가 저장된 것을 메서드라고 한다.
@@ -14,4 +15,6 @@ function startGame() {
 
 // person.greet();
 
-startGameBtn.addEventListener('click', startGame);
+// console.dir(startGame);
+
+startGameBtn.addEventListener('click', start);

@@ -1,20 +1,34 @@
 const startGameBtn = document.getElementById('start-game-btn'); 
 
-// 변수(상수)에 함수 저장하기
-const start = function () { // 익명 함수
+const ROCK = 'ROCK';
+const PAPER = 'PAPER';
+const SCISSORS = 'SCISSORS';
+const DEFAULT_USER_CHOICE = ROCK;
+
+let gameIsRunning = false;    // 게임을 시작하면 또 다른 게임을 못하게
+
+// 2025. 01. 07
+// 가위바위보 선택
+const getPlayerChoice = function() {
+  const selection = prompt(`${ROCK}, ${PAPER} or ${SCISSORS}?`, '').toUpperCase();  // 대문자 변환
+  if(
+    selection !== ROCK && 
+    selection !== PAPER &&
+    selection !== SCISSORS
+    ){  
+      alert(`Invalid choice! We chose ${DEFAULT_USER_CHOICE} for you`); // 유효하지 않는 값은 (주먹)으로 
+      return DEFAULT_USER_CHOICE;
+    }
+    
+    return selection;
+}
+
+startGameBtn.addEventListener('click', function() {
+  if(gameIsRunning){
+    return;
+  }
+  gameIsRunning = true;
   console.log('Game is starting...');
-};
-
-// 2025. 01. 06
-// 객체에 함수가 저장된 것을 메서드라고 한다.
-// const person = {
-//   greet : function greet () {
-//     console.log('Hello there!');
-//   }
-// }
-
-// person.greet();
-
-// console.dir(startGame);
-
-startGameBtn.addEventListener('click', start);
+  const playersSelection = getPlayerChoice();
+  console.log(playersSelection);
+});

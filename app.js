@@ -76,5 +76,17 @@ startGameBtn.addEventListener('click', () => {
   const playerChoice = getPlayerChoice();
   const computerChoice = getComputerChoice();
   const winner = getWinner(computerChoice, playerChoice);
-  console.log(winner);
+  
+  // 결과보기
+  let messsage = `You picked ${playerChoice}, computer picked ${computerChoice} therefore you `; 
+  if (winner === RESULT_DRAW) {
+    messsage = messsage + 'had a draw.';
+  } else if (winner === RESULT_PLAYER_WINS) {
+    messsage = messsage + 'won.';
+  } else {
+    messsage = messsage + 'lost.';
+  }
+  alert(messsage);
+
+  gameIsRunning = false;  // 게임이 끝났을경우 false 설정
 });

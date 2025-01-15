@@ -67,7 +67,7 @@ const getWinner = (cChoice, pChoice = DEFAULT_USER_CHOICE) => // 화살표 함�
   // }
 
 
-startGameBtn.addEventListener('click', () => {
+startGameBtn.addEventListener('click', () => {  // 콜백 함수
   if(gameIsRunning){
     return;
   }
@@ -102,12 +102,18 @@ startGameBtn.addEventListener('click', () => {
 // 2025. 1. 15
 // not related to game 게임과 연관 없음
 // Rest 파라미터
-const sumUp = (...numbers) => {
+const sumUp = (resultHandler,...numbers) => {
+  
+  // 함수 안에 함수
+  const validateNumber = (number) => {
+    return isNaN(number) ? 0 : number;
+  };
+  
   let sum = 0;
   for (const num of numbers){
-    sum += num;
+    sum += validateNumber(num);
   }
-  return sum;
+  resultHandler(sum);
 };
 
 const subtractUp = function() {
@@ -116,9 +122,13 @@ const subtractUp = function() {
     sum -= num;
   }
   return sum;
-}
+};
 
-console.log(sumUp(1, 5, 10, -3, 6, 10));
-console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
+const showResult = (result) => {
+  alert('The result after adding all numbers is: ' + result);
+};
+
+sumUp(showResult, 1, 5, 'fasd', -3, 6, 10);
+sumUp(showResult, 1, 5, 10, -3, 6, 10, 25, 88);
 
 console.log(subtractUp(1, 10, 15, 20));

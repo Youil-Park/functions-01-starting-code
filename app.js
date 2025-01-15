@@ -99,7 +99,9 @@ startGameBtn.addEventListener('click', () => {
 });
 
 
+// 2025. 1. 15
 // not related to game 게임과 연관 없음
+// Rest 파라미터
 const sumUp = (...numbers) => {
   let sum = 0;
   for (const num of numbers){

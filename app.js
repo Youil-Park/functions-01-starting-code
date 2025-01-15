@@ -20,7 +20,7 @@ const getPlayerChoice = () => {
     selection !== SCISSORS
     ){  
       alert(`Invalid choice! We chose ${DEFAULT_USER_CHOICE} for you`); // 유효하지 않는 값은 (주먹)으로 
-      return DEFAULT_USER_CHOICE;
+      return;
     }
     
     return selection;
@@ -44,7 +44,7 @@ const getComputerChoice = () => {
 };
 
 // 승자가 누구인지 확인
-const getWinner = (cChoice, pChoice) => // 화살표 함수
+const getWinner = (cChoice, pChoice = DEFAULT_USER_CHOICE) => // 화살표 함수
   cChoice === pChoice
     ? RESULT_DRAW 
     : (cChoice === ROCK && pChoice === PAPER) || 
@@ -75,10 +75,17 @@ startGameBtn.addEventListener('click', () => {
   console.log('Game is starting...');
   const playerChoice = getPlayerChoice();
   const computerChoice = getComputerChoice();
-  const winner = getWinner(computerChoice, playerChoice);
+  let winner;
   
+  if(playerChoice){
+    winner = getWinner(computerChoice, playerChoice);
+  } else {
+    winner = getWinner(computerChoice, undefined); // 기본인자 테스트
+                                                    // 0, null, undefined
+  }
+
   // 결과보기
-  let messsage = `You picked ${playerChoice}, computer picked ${computerChoice} therefore you `; 
+  let messsage = `You picked ${playerChoice || DEFAULT_USER_CHOICE}, computer picked ${computerChoice} therefore you `; 
   if (winner === RESULT_DRAW) {
     messsage = messsage + 'had a draw.';
   } else if (winner === RESULT_PLAYER_WINS) {
@@ -90,3 +97,26 @@ startGameBtn.addEventListener('click', () => {
 
   gameIsRunning = false;  // 게임이 끝났을경우 false 설정
 });
+
+
+// not related to game 게임과 연관 없음
+const sumUp = (...numbers) => {
+  let sum = 0;
+  for (const num of numbers){
+    sum += num;
+  }
+  return sum;
+};
+
+const subtractUp = function() {
+  let sum = 0;
+  for (const num of arguments){
+    sum -= num;
+  }
+  return sum;
+}
+
+console.log(sumUp(1, 5, 10, -3, 6, 10));
+console.log(sumUp(1, 5, 10, -3, 6, 10, 25, 88));
+
+console.log(subtractUp(1, 10, 15, 20));
